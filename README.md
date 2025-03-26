@@ -108,9 +108,9 @@ POST /api/order-bind-worker
 ### Получить отфильтрованных исполнителей
 
 ```http
-  GET /api/workers
-  GET /api/workers?id_type[]=1&id_type[]=2
-  GET /api/workers?id_type=2
+GET /api/workers
+GET /api/workers?id_type[]=1&id_type[]=2
+GET /api/workers?id_type=2
 ```
 
 | Параметр  | Тип              | Описание                                                                                                       |
