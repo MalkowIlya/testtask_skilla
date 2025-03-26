@@ -27,4 +27,3 @@ WORKDIR /var/skillaAPI
 ADD ./ /var/skillaAPI
 
 RUN composer global require laravel/installer
-RUN composer install
