@@ -12,16 +12,19 @@
 ``` dir
   /docker/nginx/conf.d/default.conf - когфигурация nginx резервирует :89 порт
 ```
+
 #### База данных тоже будет создана в docker под названием `skilla`
 
 ### Обратиться к API можно через любой REST клиент по адресу http://localhost:89
 
 #### Установка пакетов из composer должна произойти автоматически если этого не произошло запустите команду
+
 ```bash
 docker exec -i php8.3_skilla php artisan migrate
 ```
 
 #### Заполнение БД тестовыми данными должны произойти автоматически если этого не произошло запустите команду
+
 ```bash
 docker exec -i php8.3_skilla php artisan db:seed
 ```
@@ -39,7 +42,7 @@ docker exec -i php8.3_skilla php artisan passport:client --password
 ### Создать токен авторизации
 
 ```http
-  POST /passport/token
+POST /passport/token
 ```
 
 | Параметр        | Тип      | Описание                                 |
@@ -60,7 +63,7 @@ docker exec -i php8.3_skilla php artisan passport:client --password
 ### Создать заказ в случае успеха вернёт созданный заказ
 
 ```http
-  POST /api/order
+POST /api/order
 ```
 
 | Параметр         | Тип      | Описание                                    |
@@ -89,7 +92,7 @@ docker exec -i php8.3_skilla php artisan passport:client --password
 ### Назначить исполнителя на заказ
 
 ```http
-  POST /api/order-bind-worker
+POST /api/order-bind-worker
 ```
 
 | Параметр    | Тип      | Описание                                    |
