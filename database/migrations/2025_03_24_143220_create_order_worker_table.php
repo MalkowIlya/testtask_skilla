@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreign('worker_id')->references('id')->on('workers');
             $table->integer("amount");
             $table->timestamps();
+
+            $table->unique(['order_id', 'worker_id'], true);
         });
     }
 

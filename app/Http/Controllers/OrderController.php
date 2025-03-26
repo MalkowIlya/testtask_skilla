@@ -13,10 +13,11 @@ use Illuminate\Http\JsonResponse;
 class OrderController extends Controller
 {
     public function __construct(
-        readonly CreateOrderService $createOrderService,
+        readonly CreateOrderService       $createOrderService,
         readonly BindWorkerToOrderService $bindWorkerToOrderService,
-        readonly UpdateOrderService $updateOrderService,
-    ) {
+        readonly UpdateOrderService       $updateOrderService,
+    )
+    {
     }
 
     public function create(CreateOrderRequest $request): JsonResponse
@@ -30,7 +31,11 @@ class OrderController extends Controller
 
     public function bindWorker(BindOrderToWorkerRequest $request): JsonResponse
     {
-        return response()->json(['success' => $this->bindWorkerToOrderService->execute($request->validated())]);
+        try {
+            return response()->json(['success' => $this->bindWorkerToOrderService->execute($request->validated())]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => "Не удалось добавить исполнителя к заказу"], 400);
+        }
     }
 
     public function update(UpdateOrderRequest $request): JsonResponse
@@ -40,7 +45,7 @@ class OrderController extends Controller
 
             return response()->json(['success' => $success]);
         } catch (\Exception $exception) {
-            return response()->json(['success' => false, 'error' => $exception->getMessage()], "400");
+            return response()->json(['success' => false, 'error' => $exception->getMessage()], 400);
         }
     }
 }
