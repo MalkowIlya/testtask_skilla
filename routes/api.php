@@ -2,13 +2,20 @@
 
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\WorkerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 $guard = config('passport.guard', 'api');
 
 
 Route::middleware(['web', "auth:$guard"])->group(function () {
+    Route::post('/logout', function () {
+        Auth::user()->token()->revoke();
+    });
+
     Route::post('/order', [OrderController::class, 'create'])->name('order.create');
+    Route::put('/order', [OrderController::class, 'update'])->name('order.update');
+
     Route::post('/order-bind-worker', [OrderController::class, 'bindWorker'])->name('order.bindWorker');
     Route::get('/workers', [WorkerController::class, 'get'])->name('worker.get');
 });

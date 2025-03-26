@@ -24,4 +24,9 @@ class OrderRepository implements OrderRepositoryInterface
 
         return false;
     }
+
+    public function update(Order $order): bool
+    {
+        return $order->save();
+    }
 }

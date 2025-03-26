@@ -21,6 +21,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $table = 'orders';
+
     /**
      * @var list<string>
      */

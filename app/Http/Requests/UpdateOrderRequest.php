@@ -2,13 +2,14 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\WorkerIdOrderType;
 use Illuminate\Foundation\Http\FormRequest;
 
+
 /**
- * @property array|int $type_id
+ * @property int $order_id
+ * @property string $status
  */
-class GetFilteredWorkers extends FormRequest
+class UpdateOrderRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -16,12 +17,15 @@ class GetFilteredWorkers extends FormRequest
     }
 
     /**
+     * Get the validation rules that apply to the request.
+     *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'type_id' => [new WorkerIdOrderType],
+            'order_id' => ['integer', 'required'],
+            'status' => ['string', 'required']
         ];
     }
 }
